@@ -53,7 +53,7 @@ const Nav = () => {
           <NavLink to="/Recipes" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}>Recipes</NavLink>
         </li>
         <li>
-          <NavLink to="/RecipeShare" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}>Share Recipe</NavLink>
+          <NavLink to="/share" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}>Share Recipe</NavLink>
         </li>
         <li>
           <NavLink to="/ContactUs" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}>Contact Us</NavLink>
