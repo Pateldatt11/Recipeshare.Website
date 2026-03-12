@@ -1,0 +1,244 @@
+/* src/Pages/ContactUs.css */
+
+.contact-container {
+  min-height: 100vh;
+  background-color: #0d0d0d;
+  color: #ffffff;
+}
+
+/* Hero */
+.contact-hero {
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(rgba(18, 18, 18, 0.88), rgba(18, 18, 18, 0.95)),
+              url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover no-repeat;
+  text-align: center;
+  padding: 0 2rem;
+}
+
+.contact-hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1.2rem;
+}
+
+.contact-hero-content p {
+  font-size: 1.4rem;
+  opacity: 0.9;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* Main Content */
+.contact-content {
+  padding: 6rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 4rem;
+}
+
+.contact-info {
+  background: #1a1a1a;
+  padding: 2.5rem;
+  border-radius: 16px;
+  border: 1px solid #2a2a2a;
+}
+
+.contact-info h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  color: #ff4136;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.info-item .icon {
+  font-size: 2rem;
+  margin-right: 1.2rem;
+  color: #ff4136;
+}
+
+.info-item h4 {
+  font-size: 1.3rem;
+  margin-bottom: 0.4rem;
+}
+
+.info-item p {
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+.social-links {
+  margin-top: 2.5rem;
+}
+
+.social-links h4 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #ff4136;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.social-icons a {
+  font-size: 2rem;
+  color: #ffffff;
+  opacity: 0.8;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  opacity: 1;
+  transform: translateY(-3px);
+  color: #ff4136;
+}
+
+/* Form Side */
+.contact-form-wrapper {
+  background: #1a1a1a;
+  padding: 2.5rem;
+  border-radius: 16px;
+  border: 1px solid #2a2a2a;
+}
+
+.contact-form-wrapper h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1.8rem;
+  color: #ff4136;
+}
+
+.form-status {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.form-status.success {
+  background: rgba(76, 175, 80, 0.15);
+  color: #4caf50;
+}
+
+.form-status.error {
+  background: rgba(255, 65, 54, 0.15);
+  color: #ff6b6b;
+}
+
+.contact-form .form-group {
+  margin-bottom: 1.8rem;
+}
+
+.contact-form label {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.7rem;
+  color: #ff4136;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 1rem 1.3rem;
+  border: 1px solid #444;
+  border-radius: 10px;
+  background: #222;
+  color: white;
+  font-size: 1.05rem;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: #ff4136;
+  box-shadow: 0 0 0 3px rgba(255, 65, 54, 0.15);
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+/* Buttons (same as other pages) */
+.btn {
+  padding: 1rem 2.4rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.primary-btn {
+  background-color: #ff4136;
+  color: #121212;
+}
+
+.primary-btn:hover {
+  background-color: #d62f27;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(255, 65, 54, 0.3);
+}
+
+.large {
+  padding: 1.15rem 2.8rem;
+  font-size: 1.18rem;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-hero {
+    min-height: 45vh;
+  }
+  .contact-hero-content h1 {
+    font-size: 2.8rem;
+  }
+  .contact-content {
+    padding: 4rem 1.5rem;
+  }
+}
+/* Add these at the end of ContactUs.css */
+
+/* Map Wrapper */
+.map-wrapper {
+  margin: 1.5rem 0 2.5rem;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #2a2a2a;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.map-wrapper iframe {
+  display: block;
+}
+
+/* Make map responsive on smaller screens */
+@media (max-width: 768px) {
+  .map-wrapper {
+    margin: 1rem 0 2rem;
+  }
+}

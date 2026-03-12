@@ -1,0 +1,21 @@
+@font-face {
+  /* font-family: "Sauce Tomato";
+  src: url("./assets/Sauce\ Tomato.otf"); */
+  font-family: "Freshtea Healthy";
+  src: url("./assets/Freshtea\ Healthy.otf");
+}
+
+* {
+  /* font-family: "Sauce Tomato", "Monospace"; */
+  font-family: "Ubuntu", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.text-type__content {
+  font-family: "Freshtea Healthy", "Monospace";
+}

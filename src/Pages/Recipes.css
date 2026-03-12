@@ -1,0 +1,339 @@
+/* src/pages/Recipes.css - Full modern dark theme version (matched with AboutUs) */
+
+/* ────────────────────────────────────────────────
+   Global Container
+───────────────────────────────────────────────── */
+.recipes-container {
+  min-height: 100vh;
+  background-color: #0d0d0d;
+  color: #ffffff;
+}
+
+/* ────────────────────────────────────────────────
+   Hero Section
+───────────────────────────────────────────────── */
+.recipes-hero {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+      rgba(18, 18, 18, 0.88),
+      rgba(18, 18, 18, 0.92)
+    ),
+    url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')
+      center/cover no-repeat;
+  text-align: center;
+  padding: 0 2rem;
+}
+
+.recipes-hero-content {
+  max-width: 960px;
+  animation: fadeUp 1.2s ease-out;
+}
+
+.recipes-title {
+  font-size: 3.8rem;
+  font-weight: 800;
+  margin-bottom: 1.4rem;
+  line-height: 1.1;
+}
+
+.recipes-title .highlight {
+  color: #ff4136;
+}
+
+.recipes-subtitle {
+  font-size: 1.45rem;
+  opacity: 0.88;
+  max-width: 760px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* ────────────────────────────────────────────────
+   Recipes Grid Section
+───────────────────────────────────────────────── */
+.recipes-grid-section {
+  padding: 6rem 2rem;
+  background-color: #121212;
+}
+
+.recipes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* ────────────────────────────────────────────────
+   Recipe Card
+───────────────────────────────────────────────── */
+.recipe-card {
+  background: #1a1a1a;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #2a2a2a;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.recipe-card:hover {
+  transform: translateY(-12px);
+  border-color: #ff4136;
+  box-shadow: 0 20px 40px rgba(255, 65, 54, 0.15);
+}
+
+.recipe-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 220px;
+}
+
+.recipe-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.recipe-card:hover .recipe-image {
+  transform: scale(1.12);
+}
+
+.recipe-content {
+  padding: 1.6rem 1.5rem;
+  text-align: center;
+}
+
+.recipe-name {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #ff4136;
+  margin-bottom: 0.8rem;
+}
+
+.recipe-description {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  opacity: 0.85;
+  margin-bottom: 1.2rem;
+  min-height: 3.1rem; /* helps keep cards aligned */
+}
+
+.recipe-meta {
+  display: flex;
+  justify-content: center;
+  gap: 1.8rem;
+  font-size: 0.95rem;
+  opacity: 0.8;
+  flex-wrap: wrap;
+}
+
+.meta-item {
+  background: rgba(255, 65, 54, 0.08);
+  padding: 0.35rem 0.9rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 65, 54, 0.15);
+}
+
+/* ────────────────────────────────────────────────
+   Empty / No Recipes State
+───────────────────────────────────────────────── */
+.no-recipes {
+  text-align: center;
+  padding: 6rem 2rem;
+  font-size: 1.4rem;
+  opacity: 0.7;
+}
+
+/* ────────────────────────────────────────────────
+   Shared Animation (same as AboutUs)
+───────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ────────────────────────────────────────────────
+   Responsive Adjustments
+───────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .recipes-title {
+    font-size: 3.2rem;
+  }
+
+  .recipes-subtitle {
+    font-size: 1.35rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .recipes-hero {
+    min-height: 50vh;
+    padding: 8rem 1.5rem 5rem;
+  }
+
+  .recipes-title {
+    font-size: 2.8rem;
+  }
+
+  .recipes-subtitle {
+    font-size: 1.25rem;
+  }
+
+  .recipes-grid-section {
+    padding: 4rem 1.5rem;
+  }
+
+  .recipe-image-wrapper {
+    height: 200px;
+  }
+
+  .recipe-name {
+    font-size: 1.5rem;
+  }
+
+  .recipe-description {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .recipes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .recipe-meta {
+    gap: 1.2rem;
+    flex-direction: column;
+  }
+}
+/* Add to Recipes.css */
+
+.search-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 50px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.search-bar:hover,
+.search-bar:focus-within {
+  border-color: #ff4136;
+  box-shadow: 0 6px 20px rgba(255, 65, 54, 0.15);
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 1.1rem;
+  outline: none;
+}
+
+.search-bar input::placeholder {
+  color: #888;
+}
+
+.search-bar button {
+  background: #ff4136;
+  color: white;
+  border: none;
+  padding: 1rem 1.6rem;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.search-bar button:hover {
+  background: #e6392b;
+}
+
+.no-results {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #aaa;
+}
+
+.no-results p {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.no-results small {
+  opacity: 0.7;
+}
+/* ────────────────────────────────────────────────
+   Recipe Card + GlareHover Integration
+───────────────────────────────────────────────── */
+
+.recipe-card {
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+/* Soften the original hover lift since glare is now the hero effect */
+.recipe-card:hover {
+  transform: translateY(-10px);
+  border-color: #ff4136;
+  box-shadow: 0 18px 36px rgba(255, 65, 54, 0.14);
+}
+
+/* Image zoom still works beautifully with glare */
+.recipe-card:hover .recipe-image {
+  transform: scale(1.09);
+}
+
+/* Better contrast for meta items on glowing background */
+.recipe-meta {
+  display: flex;
+  justify-content: center;
+  gap: 1.6rem;
+  font-size: 0.95rem;
+  opacity: 0.9;
+  flex-wrap: wrap;
+}
+
+.recipe-meta span {
+  background: rgba(255, 65, 54, 0.13);
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 65, 54, 0.22);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.recipe-card:hover .recipe-meta span {
+  background: rgba(255, 65, 54, 0.22);
+  border-color: rgba(255, 65, 54, 0.4);
+}
+
+/* Ensure content stays above glare layer */
+.recipe-image-wrapper,
+.recipe-content {
+  position: relative;
+  z-index: 2;
+}
