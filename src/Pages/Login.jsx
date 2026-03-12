@@ -1,11 +1,9 @@
-// src/Pages/Login.jsx
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { auth } from '../firebase';
 import {
   signInWithEmailAndPassword,
-  signInWithPopup,          // ← added for popup consistency
-  signInWithRedirect,
+  signInWithPopup,
   getRedirectResult,
   GoogleAuthProvider,
   FacebookAuthProvider,
@@ -13,23 +11,23 @@ import {
   OAuthProvider,
   updateProfile,
 } from 'firebase/auth';
-
 import './Login.css';
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Jyathi aavyo hato tyae moklo, otherwise home
+  const from = location.state?.from || '/';
 
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
-
-  // New states for name prompt (when social login has no displayName)
   const [showNamePrompt, setShowNamePrompt] = useState(false);
   const [tempUser, setTempUser] = useState(null);
   const [nameInput, setNameInput] = useState('');
 
-  // ==================== LOCALSTORAGE SAVE HELPER ====================
   const saveUserToLocalStorage = (firebaseUser) => {
     if (!firebaseUser) return;
     const userData = {
@@ -41,7 +39,6 @@ const Login = () => {
     localStorage.setItem('user', JSON.stringify(userData));
     window.dispatchEvent(new Event('storage'));
   };
-  // =================================================================
 
   const getFriendlyError = (code) => {
     const errors = {
@@ -77,9 +74,8 @@ const Login = () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password);
       saveUserToLocalStorage(userCredential.user);
-
       setSuccess('Welcome back! Redirecting...');
-      setTimeout(() => navigate('/'), 1800);
+      setTimeout(() => navigate(from, { replace: true }), 1500);
     } catch (err) {
       setError(getFriendlyError(err.code) || 'Failed to sign in.');
     } finally {
@@ -87,20 +83,12 @@ const Login = () => {
     }
   };
 
-  // ────────────────────────────────────────────────
-  //     IMPROVED SOCIAL LOGIN (popup + redirect)
-  // ────────────────────────────────────────────────
   const handleSocialLoginPopup = async (provider) => {
     if (loading) return;
     setError(''); setSuccess(''); setLoading(true);
-
     try {
       const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-
-      if (user) {
-        await handleUserAfterSocial(user);
-      }
+      if (result.user) await handleUserAfterSocial(result.user);
     } catch (err) {
       if (!['auth/popup-closed-by-user', 'auth/popup-blocked'].includes(err.code)) {
         setError(getFriendlyError(err.code) || 'Social login failed.');
@@ -112,42 +100,29 @@ const Login = () => {
 
   const handleUserAfterSocial = async (user) => {
     if (!user.displayName) {
-      // Missing name → show prompt
       setTempUser(user);
       setShowNamePrompt(true);
       return;
     }
-
-    // Has name → finalize
     await finalizeSocialUser(user);
   };
 
   const finalizeSocialUser = async (user) => {
     saveUserToLocalStorage(user);
-    setSuccess('Logged in successfully! Redirecting...');
-    setTimeout(() => navigate('/'), 1800);
+    setSuccess('Logged in! Redirecting...');
+    setTimeout(() => navigate(from, { replace: true }), 1500);
   };
 
   const handleNameSubmit = async (e) => {
     e.preventDefault();
-    if (!nameInput.trim()) {
-      setError('Please enter your full name');
-      return;
-    }
-
+    if (!nameInput.trim()) return setError('Please enter your full name');
     try {
       setLoading(true);
-      await updateProfile(tempUser, {
-        displayName: nameInput.trim(),
-      });
-
-      // Get fresh user object
-      const updatedUser = auth.currentUser;
-      saveUserToLocalStorage(updatedUser);
-
+      await updateProfile(tempUser, { displayName: nameInput.trim() });
+      saveUserToLocalStorage(auth.currentUser);
       setShowNamePrompt(false);
       setSuccess('Profile updated! Redirecting...');
-      setTimeout(() => navigate('/'), 1800);
+      setTimeout(() => navigate(from, { replace: true }), 1500);
     } catch (err) {
       setError(getFriendlyError(err.code) || 'Failed to save name.');
     } finally {
@@ -155,22 +130,18 @@ const Login = () => {
     }
   };
 
-  // Redirect result (for mobile / when popup blocked)
   useEffect(() => {
     getRedirectResult(auth)
       .then(async (result) => {
-        if (result?.user) {
-          await handleUserAfterSocial(result.user);
-        }
+        if (result?.user) await handleUserAfterSocial(result.user);
       })
       .catch((err) => {
-        if (!['auth/redirect-cancelled-by-user', 'auth/user-cancelled', 'auth/popup-closed-by-user'].includes(err.code)) {
+        if (!['auth/redirect-cancelled-by-user', 'auth/popup-closed-by-user'].includes(err.code)) {
           setError(getFriendlyError(err.code) || 'Social login failed.');
         }
       });
-  }, [navigate]);
+  }, []);
 
-  // Handlers (now using popup by default – more reliable for name prompt)
   const handleGoogleLogin = () => handleSocialLoginPopup(new GoogleAuthProvider());
   const handleFacebookLogin = () => handleSocialLoginPopup(new FacebookAuthProvider());
   const handleGithubLogin = () => handleSocialLoginPopup(new GithubAuthProvider());
@@ -184,7 +155,6 @@ const Login = () => {
 
   return (
     <div className="login-container">
-
       <section className="login-hero">
         <div className="login-hero-content">
           <h1>Welcome Back to RecipeShare</h1>
@@ -226,7 +196,6 @@ const Login = () => {
                 disabled={loading}
               />
             </div>
-
             <button type="submit" className="btn primary-btn large" disabled={loading}>
               {loading ? 'Signing In...' : 'Log In'}
             </button>
@@ -240,37 +209,22 @@ const Login = () => {
           <div className="social-login">
             <p>Or continue with</p>
             <div className="social-buttons">
-              <button onClick={handleGoogleLogin} className="social-btn google" disabled={loading}>
-                Google
-              </button>
-              <button onClick={handleFacebookLogin} className="social-btn facebook" disabled={loading}>
-                Facebook
-              </button>
-              <button onClick={handleGithubLogin} className="social-btn github" disabled={loading}>
-                GitHub
-              </button>
-              <button onClick={handleMicrosoftLogin} className="social-btn microsoft" disabled={loading}>
-                Microsoft
-              </button>
-              <button onClick={handleAppleLogin} className="social-btn apple" disabled={loading}>
-                Apple
-              </button>
+              <button onClick={handleGoogleLogin} className="social-btn google" disabled={loading}>Google</button>
+              <button onClick={handleFacebookLogin} className="social-btn facebook" disabled={loading}>Facebook</button>
+              <button onClick={handleGithubLogin} className="social-btn github" disabled={loading}>GitHub</button>
+              <button onClick={handleMicrosoftLogin} className="social-btn microsoft" disabled={loading}>Microsoft</button>
+              <button onClick={handleAppleLogin} className="social-btn apple" disabled={loading}>Apple</button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ──────────────────────────────────────────────── */}
-      {/*          Name Prompt (when no displayName)         */}
-      {/* ──────────────────────────────────────────────── */}
       {showNamePrompt && (
         <div className="name-prompt-overlay">
           <div className="name-prompt-card">
             <h3>One last step!</h3>
-            <p>We couldn't get your name from the provider. Please enter it below:</p>
-
+            <p>Please enter your name:</p>
             {error && <div className="form-error">{error}</div>}
-
             <form onSubmit={handleNameSubmit}>
               <div className="form-group">
                 <label htmlFor="nameInput">Full Name</label>
@@ -285,12 +239,7 @@ const Login = () => {
                   disabled={loading}
                 />
               </div>
-
-              <button
-                type="submit"
-                className="btn primary-btn large"
-                disabled={loading}
-              >
+              <button type="submit" className="btn primary-btn large" disabled={loading}>
                 {loading ? 'Saving...' : 'Continue'}
               </button>
             </form>
