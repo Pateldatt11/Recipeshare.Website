@@ -1,4 +1,3 @@
-// src/components/Nav.jsx
 import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './Nav.css';
@@ -23,7 +22,6 @@ const Nav = () => {
 
     checkAuth();
     window.addEventListener('storage', checkAuth);
-
     return () => window.removeEventListener('storage', checkAuth);
   }, []);
 
@@ -44,19 +42,29 @@ const Nav = () => {
 
       <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
         <li>
-          <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} end onClick={closeMenu}>Home</NavLink>
+          <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} end onClick={closeMenu}>
+            Home
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/about" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}>About Us</NavLink>
+          <NavLink to="/about" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}>
+            About Us
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/Recipes" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}>Recipes</NavLink>
+          <NavLink to="/recipes" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}>
+            Recipes
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/share" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}>Share Recipe</NavLink>
+          <NavLink to="/share" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}>
+            Share Recipe
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/ContactUs" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}>Contact Us</NavLink>
+          <NavLink to="/contactus" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}>
+            Contact Us
+          </NavLink>
         </li>
         <li className="search-bar">
           <input type="text" placeholder="Search recipes..." />
@@ -77,13 +85,21 @@ const Nav = () => {
           </>
         ) : (
           <>
-            <NavLink to="/signup" className={({ isActive }) => isActive ? "auth-btn signup-btn active" : "auth-btn signup-btn"}>Sign Up</NavLink>
-            <NavLink to="/login" className={({ isActive }) => isActive ? "auth-btn login-btn active" : "auth-btn login-btn"}>Login</NavLink>
+            <NavLink to="/signup" className={({ isActive }) => isActive ? "auth-btn signup-btn active" : "auth-btn signup-btn"}>
+              Sign Up
+            </NavLink>
+            <NavLink to="/login" className={({ isActive }) => isActive ? "auth-btn login-btn active" : "auth-btn login-btn"}>
+              Login
+            </NavLink>
           </>
         )}
       </div>
 
-      <button className={`mobile-menu-btn ${isMenuOpen ? 'open' : ''}`} onClick={toggleMenu} aria-label="Toggle menu">
+      <button
+        className={`mobile-menu-btn ${isMenuOpen ? 'open' : ''}`}
+        onClick={toggleMenu}
+        aria-label="Toggle menu"
+      >
         <span></span><span></span><span></span>
       </button>
     </nav>
