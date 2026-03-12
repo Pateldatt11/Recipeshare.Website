@@ -50,10 +50,10 @@ const Nav = () => {
           <NavLink to="/about" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}>About Us</NavLink>
         </li>
         <li>
-          <NavLink to="/recipes" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}>Recipes</NavLink>
+          <NavLink to="/Recipes" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}>Recipes</NavLink>
         </li>
         <li>
-          <NavLink to="/share" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}>Share Recipe</NavLink>
+          <NavLink to="/RecipeShare" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}>Share Recipe</NavLink>
         </li>
         <li>
           <NavLink to="/ContactUs" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} onClick={closeMenu}>Contact Us</NavLink>
